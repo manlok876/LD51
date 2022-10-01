@@ -261,7 +261,6 @@ TArray<ACell*> AMineField::GetAllFlagCells() const
 {
 	TArray<ACell*> Result;
 
-	int CellColumn, CellRow;
 	for (ACell* Cell : Cells)
 	{
 		if (IsValid(Cell) && Cell->IsFlagged())
@@ -295,7 +294,6 @@ TArray<ACell*> AMineField::GetAllBombCells() const
 {
 	TArray<ACell*> Result;
 
-	int CellColumn, CellRow;
 	for (ACell* Cell : Cells)
 	{
 		if (IsValid(Cell) && Cell->HasBomb())
@@ -329,7 +327,6 @@ TArray<ABomb*> AMineField::GetAllBombs() const
 {
 	TArray<ABomb*> Result;
 
-	int CellColumn, CellRow;
 	for (ACell* Cell : Cells)
 	{
 		if (IsValid(Cell))
