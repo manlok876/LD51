@@ -17,6 +17,15 @@ public:
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void Explode();
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	int MaxCycles;
+
+	UFUNCTION(BlueprintCallable)
+	void IncrementCycles();
+
 protected:
 	virtual void BeginPlay() override;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	int CycleCounter;
 };
