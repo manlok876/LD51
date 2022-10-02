@@ -105,3 +105,95 @@ TArray<FGridCoords> UMineUtils::GetRegionCoords(const FGridCoords& From, const F
 
 	return Result;
 }
+
+FGridCoords UMineUtils::GetRandomCoords(const AMineField* Field)
+{
+	if (!IsValid(Field))
+	{
+		return FGridCoords();
+	}
+
+	return FGridCoords(FMath::RandHelper(Field->GetMazeSize().Columns),
+		FMath::RandHelper(Field->GetMazeSize().Rows));
+}
+
+FGridCoords UMineUtils::GetRandomCoordsWithoutBomb(const AMineField* Field)
+{
+	if (!IsValid(Field))
+	{
+		return FGridCoords();
+	}
+
+	FGridCoords Result = GetRandomCoords(Field);
+	ACell* ResultCell = Field->GetCellByCoords(Result);
+	check(IsValid(ResultCell));
+
+	while (ResultCell->HasBomb())
+	{
+		Result = GetRandomCoords(Field);
+		ResultCell = Field->GetCellByCoords(Result);
+		check(IsValid(ResultCell));
+	}
+
+	return Result;
+}
+
+void UMineUtils::GetRegion(const FGridCoords& Center, int Diameter,
+	FGridCoords& From, FGridCoords& To)
+{
+	if (Diameter <= 1)
+	{
+		From = To = Center;
+	}
+
+	int SideOffset = Diameter - 1;
+	FGridCoords StartOffset(SideOffset / 2, SideOffset / 2);
+	FGridCoords RegionSpan(SideOffset, SideOffset);
+
+	From = Center + StartOffset;
+	To = From + RegionSpan;
+}
+
+TArray<FGridCoords> UMineUtils::FilterValidCoordsForField(const AMineField* Field, const TArray<FGridCoords>& Coords)
+{
+	if (!IsValid(Field))
+	{
+		return TArray<FGridCoords>();
+	}
+
+	TArray<FGridCoords> Result = Coords.FilterByPredicate(
+		[&] (const FGridCoords& CellCoords) {
+			return Field->IsValidCoords(CellCoords);
+		}
+	);
+
+	return Result;
+}
+
+FGridCoords UMineUtils::GetRandomFieldCoordsInRegion(const AMineField* Field, const FGridCoords& Center, int Diameter)
+{
+	if (!IsValid(Field))
+	{
+		return Center;
+	}
+
+	if (Diameter <= 1)
+	{
+		return Center;
+	}
+
+	FGridCoords RegFrom, RegTo;
+	GetRegion(Center, Diameter, RegFrom, RegTo);
+	TArray<FGridCoords> AllRegCoords = GetRegionCoords(RegFrom, RegTo);
+
+	TArray<FGridCoords> FilteredCoords = FilterValidCoordsForField(Field, AllRegCoords);
+
+	if (FilteredCoords.Num() < 1)
+	{
+		return Center;
+	}
+
+	int RandomCoordsIdx = FMath::RandHelper(FilteredCoords.Num());
+
+	return FilteredCoords[RandomCoordsIdx];
+}

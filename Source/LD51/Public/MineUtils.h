@@ -30,4 +30,20 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	static TArray<FGridCoords> GetRegionCoords(const FGridCoords& From, const FGridCoords& To);
+
+	UFUNCTION(BlueprintCallable)
+	static FGridCoords GetRandomCoords(const AMineField* Field);
+
+	UFUNCTION(BlueprintCallable)
+	static FGridCoords GetRandomCoordsWithoutBomb(const AMineField* Field);
+
+	UFUNCTION(BlueprintCallable)
+	static void GetRegion(const FGridCoords& Center, int Diameter, FGridCoords& From, FGridCoords& To);
+
+	UFUNCTION(BlueprintCallable)
+	static TArray<FGridCoords> FilterValidCoordsForField(const AMineField* Field, const TArray<FGridCoords>& Coords);
+
+	UFUNCTION(BlueprintCallable)
+	static FGridCoords GetRandomFieldCoordsInRegion(const AMineField* Field, const FGridCoords& Center, int Diameter);
+
 };
