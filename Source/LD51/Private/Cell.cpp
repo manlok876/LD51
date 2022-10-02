@@ -101,7 +101,7 @@ void ACell::PlantBomb(ABomb* NewBomb)
 {
 	if (HasBomb())
 	{
-		// ???
+		ClearBomb(true);
 	}
 
 	Bomb = NewBomb;
