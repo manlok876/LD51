@@ -44,9 +44,9 @@ public:
 	UPROPERTY(BlueprintAssignable)
 	FCellStateChangedSignature CellStateChangedDispatcher;
 
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void PlaceFlag();
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void RemoveFlag();
 
 	UFUNCTION(BlueprintCallable)
@@ -67,6 +67,9 @@ public:
 	bool CanActivate() const;
 	UFUNCTION(BlueprintCallable)
 	void Activate();
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	int BombsAround;
 
 protected:
 	virtual void BeginPlay() override;

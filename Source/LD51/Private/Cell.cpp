@@ -9,6 +9,8 @@ ACell::ACell()
 	PrimaryActorTick.bCanEverTick = true;
 
 	State = ECellState::ECS_Closed;
+	Bomb = nullptr;
+	BombsAround = 0;
 }
 
 void ACell::BeginPlay()
@@ -53,19 +55,19 @@ void ACell::SetCellState(ECellState NewState)
 	}
 }
 
-void ACell::PlaceFlag()
+void ACell::PlaceFlag_Implementation()
 {
-	if (IsOpen() && !IsFlagged())
+	if (IsClosed() && !IsFlagged())
 	{
 		SetCellState(ECellState::ECS_Flag);
 	}
 }
 
-void ACell::RemoveFlag()
+void ACell::RemoveFlag_Implementation()
 {
 	if (IsFlagged())
 	{
-		SetCellState(ECellState::ECS_Open);
+		SetCellState(ECellState::ECS_Closed);
 	}
 }
 
