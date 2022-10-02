@@ -59,6 +59,11 @@ TArray<FGridCoords> UMineUtils::GetNeighboringCoords(
 		Result.Add(Cell);
 	}
 
+	if (bIncludeSelf)
+	{
+		Result.Add(CellCoords);
+	}
+
 	return Result;
 }
 
@@ -150,7 +155,7 @@ void UMineUtils::GetRegion(const FGridCoords& Center, int Diameter,
 	FGridCoords StartOffset(SideOffset / 2, SideOffset / 2);
 	FGridCoords RegionSpan(SideOffset, SideOffset);
 
-	From = Center + StartOffset;
+	From = Center - StartOffset;
 	To = From + RegionSpan;
 }
 
