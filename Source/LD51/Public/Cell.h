@@ -61,7 +61,7 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void PlantBomb(ABomb* NewBomb);
 	UFUNCTION(BlueprintCallable)
-	void ClearBomb();
+	void ClearBomb(bool bDestroy = false);
 
 	UFUNCTION(BlueprintPure)
 	bool CanActivate() const;

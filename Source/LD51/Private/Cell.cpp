@@ -8,6 +8,7 @@ ACell::ACell()
 {
 	PrimaryActorTick.bCanEverTick = true;
 
+	State = ECellState::ECS_Closed;
 }
 
 void ACell::BeginPlay()
@@ -104,14 +105,17 @@ void ACell::PlantBomb(ABomb* NewBomb)
 	Bomb = NewBomb;
 }
 
-void ACell::ClearBomb()
+void ACell::ClearBomb(bool bDestroy)
 {
 	if (!HasBomb())
 	{
 		return;
 	}
 
-	// Destroy?
+	if (bDestroy)
+	{
+		Bomb->Destroy();
+	}
 
 	Bomb = nullptr;
 }
