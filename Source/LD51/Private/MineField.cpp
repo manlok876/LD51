@@ -48,6 +48,11 @@ void AMineField::Init_Implementation(int W, int L)
 
 	UpdateMazeSize(W, L);
 
+	for (ACell* Cell : Cells)
+	{
+		Cell->NeighborsCache.Append(UMineUtils::GetNeighboringCellsByCell(this, Cell, false));
+	}
+
 	bInitialized = true;
 }
 

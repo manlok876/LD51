@@ -144,4 +144,19 @@ void ACell::Activate()
 	{
 		CurBomb->Explode();
 	}
+	else if (BombsAround < 1)
+	{
+		for (ACell* Cell : NeighborsCache)
+		{
+			if (!IsValid(Cell))
+			{
+				continue;
+			}
+
+			if (Cell->CanActivate())
+			{
+				Cell->Activate();
+			}
+		}
+	}
 }

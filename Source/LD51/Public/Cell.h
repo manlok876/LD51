@@ -71,6 +71,9 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	int BombsAround;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	TArray<ACell*> NeighborsCache;
+
 protected:
 	virtual void BeginPlay() override;
 
