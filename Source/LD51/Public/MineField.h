@@ -73,16 +73,16 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void CoverCoords(const TArray<FGridCoords>& InCoords);
 
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION(BlueprintCallable, BlueprintPure = false)
 	TArray<ACell*> GetAllFlagCells() const;
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION(BlueprintCallable, BlueprintPure = false)
 	TArray<FGridCoords> GetAllFlagCoords() const;
 
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION(BlueprintCallable, BlueprintPure = false)
 	TArray<ACell*> GetAllBombCells() const;
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION(BlueprintCallable, BlueprintPure = false)
 	TArray<FGridCoords> GetAllBombCoords() const;
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION(BlueprintCallable, BlueprintPure = false)
 	TArray<ABomb*> GetAllBombs() const;
 
 protected:
