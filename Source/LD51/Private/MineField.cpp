@@ -171,6 +171,11 @@ bool AMineField::IsValidCell(int Column, int Row) const
 	return Cells.IsValidIndex(GetCellIndex1D(Column, Row));
 }
 
+bool AMineField::IsValidCoords(const FGridCoords& Coordinates) const
+{
+	return IsValidCell(Coordinates.Column, Coordinates.Row);
+}
+
 bool AMineField::ContainsCell(ACell* Cell) const
 {
 	if (!IsValid(Cell))

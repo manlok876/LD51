@@ -55,6 +55,8 @@ public:
 	UFUNCTION(BlueprintPure)
 	bool IsValidCell(int Column, int Row) const;
 	UFUNCTION(BlueprintPure)
+	bool IsValidCoords(const FGridCoords& Coordinates) const;
+	UFUNCTION(BlueprintPure)
 	bool ContainsCell(ACell* Cell) const;
 	UFUNCTION(BlueprintPure)
 	ACell* GetCell(int Column, int Row) const;
