@@ -30,3 +30,8 @@ void ABomb::IncrementCycles()
 		Explode();
 	}
 }
+
+int ABomb::NumCyclesUntilBoom() const
+{
+	return MaxCycles - CycleCounter;
+}

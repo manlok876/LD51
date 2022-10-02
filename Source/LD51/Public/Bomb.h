@@ -23,6 +23,9 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void IncrementCycles();
 
+	UFUNCTION(BlueprintPure)
+	int NumCyclesUntilBoom() const;
+
 protected:
 	virtual void BeginPlay() override;
 
